@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: linux-common
   author: jaydrogers
   description: Common tools, hardening, and practices for Linux servers.
   company: "Server Side Up"
