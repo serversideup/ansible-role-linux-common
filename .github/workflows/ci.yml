@@ -35,11 +35,11 @@ jobs:
         strategy:
             matrix:
                 distro:
-                    - 'ubuntu:22.04'
-                    - 'ubuntu:20.04'
-                    - 'ubuntu:18.04'
-                    - 'debian:11'
-                    - 'debian:10'
+                    - ubuntu2204
+                    - ubuntu2004
+                    - ubuntu1804
+                    - debian11
+                    - debian10
 
         steps:
             - name: Check out the codebase.
