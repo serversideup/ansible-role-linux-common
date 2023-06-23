@@ -1,5 +1,13 @@
 ---
-- name: Ensure hostname is set.
-  ansible.builtin.hostname:
-    name: "{{ inventory_hostname }}"
-    use: debian
+- name: Disable USERGROUPS_ENABLE for Umask 022.
+  ansible.builtin.lineinfile:
+    dest: /etc/login.defs
+    regexp: ^USERGROUPS_ENAB
+    line: "#USERGROUPS_ENAB yes"
+    state: present
+    backrefs: yes
+
+- name: Update the apt cache
+  apt:
+    update_cache: yes
+    cache_valid_time: "{{ apt_cache_expiration }}"
