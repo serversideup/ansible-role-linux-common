@@ -2,7 +2,7 @@
 		<a href="https://github.com/serversideup/ansible-linux-common"><img src="https://raw.githubusercontent.com/serversideup/ansible-linux-common/main/.github/img/header.png" width="1280" alt="GitHub Header"></a>
 </p>
 <p align="center">
-	<a href="https://github.com/serversideup/ansible-linux-common/actions/workflows/publish_docker-images-production.yml"><img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/serversideup/ansible-linux-common/publish_docker-images-production.yml?branch=main"></a>
+	<a href="https://github.com/serversideup/ansible-linux-common/actions/workflows/publish_docker-images-production.yml"><img alt="Build Status" src="https://img.shields.io/github/actions/workflow/status/serversideup/ansible-linux-common/release.yml"></a>
 	<a href="https://github.com/serversideup/ansible-linux-common/blob/main/LICENSE" target="_blank"><img src="https://badgen.net/github/license/serversideup/ansible-linux-common" alt="License"></a>
 	<a href="https://github.com/sponsors/serversideup"><img src="https://badgen.net/badge/icon/Support%20Us?label=GitHub%20Sponsors&color=orange" alt="Support us"></a>
   <br />
