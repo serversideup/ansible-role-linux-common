@@ -1,0 +1,5 @@
+---
+- name: Ensure hostname is set.
+  ansible.builtin.hostname:
+    name: "{{ inventory_hostname }}"
+    use: debian

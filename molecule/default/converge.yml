@@ -19,6 +19,8 @@
       when: ansible_service_mgr == 'systemd'
       changed_when: false
       failed_when: systemctl_status.rc > 1
-
-  roles:
-    - role: jaydrogers.linux_common
+ 
+  tasks:
+    - name: "Include jaydrogers.linux_common"
+      include_role:
+        name: "jaydrogers.linux_common"
