@@ -8,6 +8,6 @@
     backrefs: yes
 
 - name: Update the apt cache
-  apt:
+  ansible.builtin.apt:
     update_cache: yes
     cache_valid_time: "{{ apt_cache_expiration }}"
