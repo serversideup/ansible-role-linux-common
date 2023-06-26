@@ -13,7 +13,7 @@ common_installed_packages:
   - htop
   - logrotate
   - mailutils
-  - ncdcu
+  - ncdu
   - python3-minimal
   - ufw
   - unattended-upgrades
