@@ -1,8 +1,4 @@
 ---
 
-- name: Molecule Hello World!
-  ansible.builtin.debug:
-    msg: Hello, World!
-
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
