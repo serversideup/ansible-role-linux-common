@@ -7,7 +7,32 @@
     state: present
     backrefs: yes
 
-- name: Update the apt cache
+- name: Update the apt cache.
   ansible.builtin.apt:
     update_cache: yes
     cache_valid_time: "{{ apt_cache_expiration }}"
+
+- name: Install latest versions of common packages.
+  ansible.builtin.apt:
+    name: "{{ common_installed_packages }}"
+    state: latest
+    cache_valid_time: "{{ apt_cache_expiration }}"
+
+- name: Configure server to automatically install security updates.
+  ansible.builtin.template:
+    src: etc/apt/apt/conf.d/20auto-install-updates.j2
+    dest: /etc/apt/apt.conf.d/20auto-install-updates
+    owner: root
+    group: root
+    mode: 0644
+
+- name: "Set server timezone to {{ timezone }}."
+  community.general.timezone:
+    name: "{{ timezone }}"
+
+- name: Set NTP servers for time syncing.
+  template:
+    src: etc/systemd/timesyncd.conf
+    dest: /etc/systemd/timesyncd.conf
+  notify: enable Timedatectl
+  when: ansible_service_mgr == "systemd"

@@ -1,2 +1,3 @@
 ---
-# handlers file for linux-common
+- name: enable Timedatectl
+  command: timedatectl set-ntp true

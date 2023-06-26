@@ -5,3 +5,45 @@
 
 # Time is in seconds (default: 24 hours)
 apt_cache_expiration: 86400
+
+# Common packages to install
+common_installed_packages:
+  - curl
+  - git
+  - htop
+  - logrotate
+  - mailutils
+  - ncdcu
+  - python3-minimal
+  - ufw
+  - unattended-upgrades
+  - unzip
+  - wget
+  - zip
+
+# APT - Automatic Update Configuration
+apt_periodic_update_package_lists: "1"
+apt_periodic_download_upgradeable_packages: "1"
+apt_periodic_autoclean_interval: "7"
+apt_periodic_unattended_upgrade: "1"
+
+
+# Apply a timezone to all servers
+server_timezone: "UTC"
+
+###########################################
+# Time configuration
+###########################################
+
+# NTP configuration settings
+timedatectl_timeservers:
+  - "0.ubuntu.pool.ntp.org"
+  - "1.ubuntu.pool.ntp.org"
+  - "2.ubuntu.pool.ntp.org"
+  - "3.ubuntu.pool.ntp.org"
+
+timedatectl_timeservers_fallback:
+  - "time-a-g.nist.gov"
+  - "time-b-g.nist.gov"
+  - "time-c-g.nist.gov"
+  - "time-d-g.nist.gov"
