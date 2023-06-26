@@ -26,13 +26,10 @@
     group: root
     mode: 0644
 
-- name: "Set server timezone to {{ timezone }}."
-  community.general.timezone:
-    name: "{{ timezone }}"
+- name: Set server timezone.
+  copy: content="{{ server_timezone }}\n" dest=/etc/timezone owner=root group=root mode=0644
+  register: timezone
 
-- name: Set NTP servers for time syncing.
-  template:
-    src: etc/systemd/timesyncd.conf
-    dest: /etc/systemd/timesyncd.conf
-  notify: enable Timedatectl
-  when: ansible_service_mgr == "systemd"
+- name: Reconfigure Timezone Data (if changed)
+  shell: dpkg-reconfigure -f noninteractive tzdata
+  when: timezone.changed
