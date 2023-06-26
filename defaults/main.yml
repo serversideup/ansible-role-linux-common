@@ -1,2 +1,7 @@
 ---
-# defaults file for linux-common
+###########################################
+# APT Configuration
+###########################################
+
+# Time is in seconds (default: 24 hours)
+apt_cache_expiration: 86400
