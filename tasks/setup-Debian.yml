@@ -27,7 +27,7 @@
     mode: 0644
 
 - name: Check current server timezone.
-  shell: cat /etc/timezone
+  shell: timedatectl show --property=Timezone --value
   register: current_timezone
   changed_when: false
 

@@ -10,6 +10,7 @@
     - name: Check current timezone
       command: timedatectl show --property=Timezone --value
       register: current_timezone
+      changed_when: false
 
     - name: Assert timezone is correct
       assert:
