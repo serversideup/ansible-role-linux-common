@@ -29,7 +29,6 @@ apt_periodic_download_upgradeable_packages: "1"
 apt_periodic_autoclean_interval: "7"
 apt_periodic_unattended_upgrade: "1"
 
-
 ###########################################
 # Time configuration
 ###########################################
