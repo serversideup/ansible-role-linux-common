@@ -8,6 +8,7 @@ apt_cache_expiration: 86400
 
 # Common packages to install
 common_installed_packages:
+  - cron
   - curl
   - git
   - htop

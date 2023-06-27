@@ -1,2 +1,5 @@
 ---
-# handlers file for linux-common
+- name: restart cron
+  service:
+    name: cron
+    state: restarted

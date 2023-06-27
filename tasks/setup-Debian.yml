@@ -34,3 +34,4 @@
 - name: Set server timezone if it doesn't match.
   command: timedatectl set-timezone "{{ server_timezone }}"
   when: current_timezone.stdout != server_timezone
+  notify: restart cron
