@@ -46,3 +46,15 @@ apt_periodic_update_package_lists: "1"
 apt_periodic_download_upgradeable_packages: "1"
 apt_periodic_autoclean_interval: "7"
 apt_periodic_unattended_upgrade: "1"
+
+###########################################
+# Fun Terminal Customizations
+###########################################
+motd_header_text: "ServerSideUp"
+motd_header_text_color: '\e[38;5;255m'
+motd_header_background_color: '\e[48;5;34m'
+motd_hostname_text_color: '\e[38;5;202m'
+motd_services:
+  - ufw
+  - fail2ban
+  - postfix
