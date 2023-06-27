@@ -20,11 +20,14 @@
 
 - name: Configure server to automatically install security updates.
   ansible.builtin.template:
-    src: etc/apt/apt/conf.d/20auto-install-updates.j2
-    dest: /etc/apt/apt.conf.d/20auto-install-updates
+    src: "etc/apt/apt.conf.d/{{ item }}.j2"
+    dest: "/etc/apt/apt.conf.d/{{ item }}"
     owner: root
     group: root
     mode: 0644
+  with_items: 
+    - 20auto-upgrades
+    - 50unattended-upgrades
 
 - name: Check current server timezone.
   shell: timedatectl show --property=Timezone --value

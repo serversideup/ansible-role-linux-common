@@ -1,5 +1,20 @@
 ---
 ###########################################
+# Basic Server Configuration
+###########################################
+server_timezone: "Etc/UTC"
+server_contact: changeme@example.com
+
+## Email Notifications
+postfix_hostname: "{{ inventory_hostname }}"
+
+## Set variables below to enable external SMTP relay
+# postfix_relayhost: "smtp.example.com"
+# postfix_relayhost_port: "587"
+# postfix_relayhost_username: "myusername"
+# postfix_relayhost_password: "mysupersecretpassword"
+
+###########################################
 # APT Configuration
 ###########################################
 
@@ -10,6 +25,7 @@ apt_cache_expiration: 86400
 common_installed_packages:
   - cron
   - curl
+  - figlet
   - git
   - htop
   - logrotate
@@ -29,8 +45,3 @@ apt_periodic_update_package_lists: "1"
 apt_periodic_download_upgradeable_packages: "1"
 apt_periodic_autoclean_interval: "7"
 apt_periodic_unattended_upgrade: "1"
-
-###########################################
-# Time configuration
-###########################################
-server_timezone: "Etc/UTC"

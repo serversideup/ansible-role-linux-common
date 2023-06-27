@@ -3,3 +3,16 @@
   service:
     name: cron
     state: restarted
+
+- name: restart postfix
+  service:
+    name: postfix
+    state: restarted
+
+- name: create postmap hash
+  command: postmap /etc/postfix/sasl_passwd
+  when: postfix_relayhost is defined
+  notify: restart postfix
+
+- name: newaliases
+  command: newaliases
