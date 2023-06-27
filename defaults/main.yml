@@ -26,6 +26,7 @@ common_installed_packages:
   - cron
   - curl
   - figlet
+  - fail2ban
   - git
   - htop
   - logrotate
