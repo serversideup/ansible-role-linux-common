@@ -4,7 +4,15 @@
 - name: Verify
   hosts: all
   gather_facts: false
-  tasks:
-    - name: Example assertion
-      ansible.builtin.assert:
-        that: true
+  vars_files:
+    - vars.yml
+  tasks:   
+    - name: Check current timezone
+      command: timedatectl show --property=Timezone --value
+      register: current_timezone
+
+    - name: Assert timezone is correct
+      assert:
+        that:
+          - current_timezone.stdout == server_timezone
+        fail_msg: "Timezone is not set correctly"
