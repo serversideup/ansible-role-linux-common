@@ -27,7 +27,12 @@
     mode: 0644
 
 - name: Set server timezone.
-  copy: content="{{ server_timezone }}\n" dest=/etc/timezone owner=root group=root mode=0644
+  copy: 
+    content: "{{ server_timezone }}\n"
+    dest: /etc/timezone
+    owner: root
+    group: root
+    mode: 0644
   register: timezone
 
 - name: Reconfigure Timezone Data (if changed)
