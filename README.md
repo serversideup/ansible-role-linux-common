@@ -30,25 +30,120 @@ All of our software is free an open to the world. None of this can be brought to
 #### Individual Supporters
 <!-- supporters --><a href="https://github.com/deligoez"><img src="https://github.com/deligoez.png" width="40px" alt="deligoez" /></a>&nbsp;&nbsp;<a href="https://github.com/alexjustesen"><img src="https://github.com/alexjustesen.png" width="40px" alt="alexjustesen" /></a>&nbsp;&nbsp;<a href="https://github.com/jeremykenedy"><img src="https://github.com/jeremykenedy.png" width="40px" alt="jeremykenedy" /></a>&nbsp;&nbsp;<!-- supporters -->
 
-Role Name
+Linux Common
 =========
 
-A brief description of the role goes here.
+ A simple playbook to secure your server, prep your users, and prepare your server for other uses. 
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+For now, this project focuses on supporting **Ubuntu 22.04** only. Choose any host that you'd like. All this role needs is an SSH connection to a user that has `sudo` privileges.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+You can find all variables organized and documented in `defaults/main.yml`. Feel free to override any variable of your choice.
+
+```yml
+---
+###########################################
+# Basic Server Configuration
+###########################################
+server_timezone: "Etc/UTC"
+server_contact: changeme@example.com
+
+# SSH
+server_ssh_port: "22"
+
+## Email Notifications
+postfix_hostname: "{{ inventory_hostname }}"
+
+## Set variables below to enable external SMTP relay
+# postfix_relayhost: "smtp.example.com"
+# postfix_relayhost_port: "587"
+# postfix_relayhost_username: "myusername"
+# postfix_relayhost_password: "mysupersecretpassword"
+
+###########################################
+# APT Configuration
+###########################################
+
+# Time is in seconds (default: 24 hours)
+apt_cache_expiration: 86400
+
+# Common packages to install
+common_installed_packages:
+  - cron
+  - curl
+  - figlet
+  - fail2ban
+  - git
+  - htop
+  - logrotate
+  - mailutils
+  - ncdu
+  - ntp
+  - python3-minimal
+  - ssh
+  - tzdata
+  - ufw
+  - unattended-upgrades
+  - unzip
+  - wget
+  - zip
+
+# APT - Automatic Update Configuration
+apt_periodic_update_package_lists: "1"
+apt_periodic_download_upgradeable_packages: "1"
+apt_periodic_autoclean_interval: "7"
+apt_periodic_unattended_upgrade: "1"
+
+###########################################
+# Fun Terminal Customizations
+###########################################
+motd_header_text: "ServerSideUp"
+motd_header_text_color: '\e[38;5;255m'
+motd_header_background_color: '\e[48;5;34m'
+motd_hostname_text_color: '\e[38;5;202m'
+motd_services:
+  - ufw
+  - fail2ban
+  - postfix
+
+##############################################################
+# Users
+##############################################################
+
+### Use the template below to set users and their authorized keys
+## Passwords must be set with an encrypted hash. To do this, see the Ansible FAQ
+## https://docs.ansible.com/ansible/latest/reference_appendices/faq.html#how-do-i-generate-encrypted-passwords-for-the-user-module
+
+# system_users:
+#   - username: alice
+#     name: Alice Smith
+#     state: present
+#     groups: ['adm', 'sudo']
+#     password: "$6$mysecretsalt$qJbapG68nyRab3gxvKWPUcs2g3t0oMHSHMnSKecYNpSi3CuZm.GbBqXO8BE6EI6P1JUefhA0qvD7b5LSh./PU1"
+#     shell: "/bin/bash"
+#     authorized_keys:
+#       - public_key: "ssh-ed25519 AAAAC3NzaC1lmyfakeublickeyMVIzwQXBzxxD9b8Erd1FKVvu alice"
+
+#   - username: bob
+#     name: Bob Smith
+#     state: present
+#     password: "$6$mysecretsalt$qJbapG68nyRab3gxvKWPUcs2g3t0oMHSHMnSKecYNpSi3CuZm.GbBqXO8BE6EI6P1JUefhA0qvD7b5LSh./PU1"
+#     groups: ['adm', 'sudo']
+#     shell: "/bin/bash"
+#     authorized_keys:
+#       - public_key: "ssh-ed25519 AAAAC3NzaC1anotherfakekeyIMVIzwQXBzxxD9b8Erd1FKVvu bob"
+
+```
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+No dependencies 😃
 
 Example Playbook
 ----------------
@@ -57,4 +152,4 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: jaydrogers.linux_common, server_timezone: 'America/Chicago' }
