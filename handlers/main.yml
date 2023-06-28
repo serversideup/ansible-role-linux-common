@@ -16,3 +16,8 @@
 
 - name: newaliases
   command: newaliases
+
+- name: restart ssh
+  service:
+    name: ssh
+    state: restarted

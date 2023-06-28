@@ -17,3 +17,15 @@
         that:
           - current_timezone.stdout == server_timezone
         fail_msg: "Timezone is not set correctly"
+      
+    - name: Check to see if the user "bob" exists.
+      command: whoami
+      become_user: bob
+      register: bob_whoami
+      changed_when: false
+
+    - name: Assert Bob user exists.
+      assert:
+        that:
+          - current_timezone.stdout == server_timezone
+        fail_msg: "Failed to assert the user 'bob' exists."
