@@ -1,14 +1,14 @@
 ---
 - name: Configure users.
   ansible.builtin.user:
-    name: '{{item.username}}'
+    name: '{{ item.username }}'
     groups: '{{ item.groups | join(",") | default(omit) }}'
-    shell: '{{item.shell | default(omit)}}'
-    password: '{{item.password | default(omit)}}'
-    comment: '{{item.name | default(omit)}}'
-    uid: '{{item.uid | default(omit)}}'
-    home: '{{item.homedir | default(omit)}}'
-    state: '{{item.state | default("present")}}'
+    shell: '{{ item.shell | default(omit) }}'
+    password: '{{ item.password | default(omit) }}'
+    comment: '{{ item.name | default(omit) }}'
+    uid: '{{ item.uid | default(omit) }}'
+    home: '{{ item.homedir | default(omit) }}'
+    state: '{{ item.state | default("present") }}'
   with_items: "{{ system_users }}"
   register: created_users
 
