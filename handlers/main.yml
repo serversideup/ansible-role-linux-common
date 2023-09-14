@@ -1,23 +1,23 @@
 ---
-- name: restart cron
-  service:
+- name: Restart cron
+  ansible.builtin.service:
     name: cron
     state: restarted
 
-- name: restart postfix
-  service:
+- name: Restart postfix
+  ansible.builtin.service:
     name: postfix
     state: restarted
 
-- name: create postmap hash
-  command: postmap /etc/postfix/sasl_passwd
+- name: Create postmap hash
+  ansible.builtin.command: postmap /etc/postfix/sasl_passwd
   when: postfix_relayhost is defined
-  notify: restart postfix
+  notify: Restart postfix
 
-- name: newaliases
-  command: newaliases
+- name: Run newaliases
+  ansible.builtin.command: Run newaliases
 
-- name: restart ssh
-  service:
+- name: Restart ssh
+  ansible.builtin.service:
     name: ssh
     state: restarted

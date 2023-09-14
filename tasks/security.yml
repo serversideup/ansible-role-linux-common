@@ -4,7 +4,7 @@
     regexp: "^PermitRootLogin"
     line: "PermitRootLogin no"
     state: present
-  notify: restart ssh
+  notify: Restart ssh
 
 - name: Set SSH port.
   ansible.builtin.lineinfile:
@@ -12,7 +12,7 @@
     regexp: "^Port"
     line: "Port {{ server_ssh_port }}"
     state: present
-  notify: restart ssh
+  notify: Restart ssh
 
 - name: Disallow password authentication over SSH.
   ansible.builtin.lineinfile:
@@ -20,7 +20,7 @@
     regexp: "^PasswordAuthentication"
     line: "PasswordAuthentication no"
     state: present
-  notify: restart ssh
+  notify: Restart ssh
 
 - name: Open the firewall port for SSH.
   ansible.builtin.command: "ufw allow {{ server_ssh_port }}/tcp"

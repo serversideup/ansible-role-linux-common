@@ -32,4 +32,4 @@
 - name: "Set timezone to {{ server_timezone }}."
   community.general.timezone:
     name: "{{ server_timezone }}"
-  notify: restart cron
+  notify: Restart cron

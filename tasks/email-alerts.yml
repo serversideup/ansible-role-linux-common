@@ -6,7 +6,7 @@
     line: "inet_interfaces = loopback-only"
     state: present
     backrefs: yes
-  notify: restart postfix
+  notify: Restart postfix
 
 - name: Configure Postfix hostname.
   ansible.builtin.lineinfile:
@@ -15,7 +15,7 @@
     line: "myhostname = {{ postfix_hostname }}"
     state: present
     backrefs: yes
-  notify: restart postfix
+  notify: Restart postfix
 
 - name: Prevent Postfix from listening on ports.
   ansible.builtin.lineinfile:
@@ -24,7 +24,7 @@
     line: "#smtp      inet"
     state: present
     backrefs: yes
-  notify: restart postfix
+  notify: Restart postfix
 
 - name: Configure Postfix relayhost (if set).
   ansible.builtin.lineinfile:
@@ -33,7 +33,7 @@
     line: "relayhost = [{{ postfix_relayhost }}]:{{ postfix_relayhost_port }}"
     state: present
     backrefs: yes
-  notify: restart postfix
+  notify: Restart postfix
   when: postfix_relayhost is defined
 
 - name: Set Postfix Sasl password (if set).
@@ -43,7 +43,7 @@
     line: "[{{ postfix_relayhost }}]:{{ postfix_relayhost_port }} {{ postfix_relayhost_username }}:{{ postfix_relayhost_password }}"
     state: present
     backrefs: yes
-  notify: create postmap hash
+  notify: Create postmap hash
   when: postfix_relayhost is defined
 
 - name: Set Postfix aliases for root user email notifications.
@@ -51,4 +51,4 @@
     dest: /etc/aliases
     regexp: "^root:"
     line: "root: {{ server_contact }}"
-  notify: newaliases
+  notify: Run newaliases
