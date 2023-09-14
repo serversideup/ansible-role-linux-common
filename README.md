@@ -142,8 +142,13 @@ motd_services:
 
 Dependencies
 ------------
+See (`requirements.yml`)[./requirements.yml] for all collection dependencies.
 
-No dependencies 😃
+To install all dependencies, run:
+
+```bash
+ansible-galaxy install -r requirements.yml
+```
 
 Example Playbook
 ----------------

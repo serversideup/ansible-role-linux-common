@@ -29,12 +29,7 @@
     - 20auto-upgrades
     - 50unattended-upgrades
 
-- name: Check current server timezone.
-  shell: timedatectl show --property=Timezone --value
-  register: current_timezone
-  changed_when: false
-
-- name: Set server timezone if it doesn't match.
-  command: timedatectl set-timezone "{{ server_timezone }}"
-  when: current_timezone.stdout != server_timezone
+- name: "Set timezone to {{ server_timezone }}."
+  community.general.timezone:
+    name: "{{ server_timezone }}"
   notify: restart cron

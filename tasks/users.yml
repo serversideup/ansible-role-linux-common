@@ -13,7 +13,7 @@
   register: created_users
 
 - name: Configure authorized keys.
-  ansible.builtin.authorized_key:
+  ansible.posix.authorized_key:
     user: '{{item.0.username}}'
     key: '{{item.1.public_key}}'
     state: '{{item.1.state | default ("present")}}'
