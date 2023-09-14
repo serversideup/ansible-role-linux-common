@@ -15,7 +15,7 @@
   notify: Restart postfix
 
 - name: Run newaliases
-  ansible.builtin.command: Run newaliases
+  ansible.builtin.command: newaliases
 
 - name: Restart ssh
   ansible.builtin.service:
