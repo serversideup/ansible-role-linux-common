@@ -1,4 +1,14 @@
 ---
+- name: Set users variable when there are NOT any additional users.
+  ansible.builtin.set_fact:
+    flattend_users: "{{ users }}"
+  when: additional_users is not defined
+
+- name: Set users variable when there ARE additional users.
+  ansible.builtin.set_fact:
+    flattend_users: "{{ users + additional_users }}"
+  when: additional_users is defined
+
 - name: Configure users.
   ansible.builtin.user:
     name: '{{ item.username }}'
@@ -9,7 +19,7 @@
     uid: '{{ item.uid | default(omit) }}'
     home: '{{ item.homedir | default(omit) }}'
     state: '{{ item.state | default("present") }}'
-  with_items: "{{ system_users }}"
+  with_items: "{{ users }}"
   register: created_users
 
 - name: Configure authorized keys.
@@ -18,7 +28,7 @@
     key: '{{item.1.public_key}}'
     state: '{{item.1.state | default ("present")}}'
   with_subelements:
-    - "{{ system_users }}"
+    - "{{ users }}"
     - authorized_keys
     - skip_missing: true
   when: item.0.state | default("present") != 'absent'
