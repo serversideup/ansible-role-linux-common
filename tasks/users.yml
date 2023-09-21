@@ -19,7 +19,7 @@
     uid: '{{ item.uid | default(omit) }}'
     home: '{{ item.homedir | default(omit) }}'
     state: '{{ item.state | default("present") }}'
-  with_items: "{{ users }}"
+  with_items: "{{ flattend_users }}"
   register: created_users
 
 - name: Configure authorized keys.
@@ -28,7 +28,7 @@
     key: '{{item.1.public_key}}'
     state: '{{item.1.state | default ("present")}}'
   with_subelements:
-    - "{{ users }}"
+    - "{{ flattend_users }}"
     - authorized_keys
     - skip_missing: true
   when: item.0.state | default("present") != 'absent'

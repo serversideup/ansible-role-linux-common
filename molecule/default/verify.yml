@@ -16,14 +16,14 @@
           - current_timezone.stdout == server_timezone
         fail_msg: "Timezone is not set correctly"
       
-    - name: Check to see if the user "charlie" exists.
-      command: whoami
-      become_user: charlie
-      register: charlie_whoami
-      changed_when: false
+    - name: Get Charlie user info.
+      ansible.builtin.user:
+        name: charlie
+      register: charlie_user_test
 
     - name: Assert charlie user exists.
       assert:
         that:
-          - current_timezone.stdout == server_timezone
+          - charlie_user_test.name == 'charlie'
+          - charlie_user_test.changed == false
         fail_msg: "Failed to assert the user 'charlie' exists."
